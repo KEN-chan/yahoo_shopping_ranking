@@ -2,7 +2,7 @@ import { createStore as reduxCreateStore, combineReducers, applyMiddleware } fro
 import logger from 'redux-logger';
 import { routerReducer, routerMiddleware } from "react-router-redux";
 import * as reducers from './reducers';
-
+import thunk from "redux-thunk";
 export default function createStore(history) {
 
   return reduxCreateStore(
@@ -10,6 +10,6 @@ export default function createStore(history) {
       ...reducers,
       router: routerReducer,
     }),
-    applyMiddleware(logger, routerMiddleware(history)),
+    applyMiddleware(logger, thunk, routerMiddleware(history)),
   );
 };
